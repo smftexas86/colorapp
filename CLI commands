@@ -1,0 +1,7 @@
+## login to azure
+az login --use-device-code
+
+## deploy bicep 
+az deployment group create --resource-group VM --name fw --template-file "path/file.bicep"
+
+
