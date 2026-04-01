@@ -25,7 +25,7 @@ stages:
         azureSubscription: 'azure iac'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: "az deployment group create --resource-group colorapp_RG --template-file module/vnet.bicep"
+        inlineScript: "az deployment group create --resource-group test_rg --template-file module/vnet.bicep"
 
     
   
