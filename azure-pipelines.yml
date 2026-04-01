@@ -5,18 +5,27 @@
 
 trigger: none
 
-pool:
-  vmImage: ubuntu-latest
-
-
-steps:
-
-# Create Resource Group
-- script: |
-    az group create --location northcentralUS --name colorapp_RG 
-  displayName: 'Create ResourceGroup'
+stages:
+- stage: deployment
+  jobs:
+  - job: Job
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'azure iac'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: "az group create \\\n  --resource-group test-rg \\\n  --location northcentralUS\n  \n"
 
 # deploy Vnet
-- script: |
-    az deployment group create --resource-group colorapp_RG --template-file module/vnet.bicep
-  displayName: 'Deploy Vnet'
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'azure iac'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: "az deployment group create --resource-group colorapp_RG --template-file module/vnet.bicep"
+
+    
+  
