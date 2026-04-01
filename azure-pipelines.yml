@@ -11,7 +11,12 @@ pool:
 
 steps:
 
+# Create Resource Group
 - script: |
     az group create --location northcentralUS --name colorapp_RG 
   displayName: 'Create ResourceGroup'
 
+# deploy Vnet
+- script: |
+    az deployment group create --resource-group colorapp_RG --template-file module/vnet.bicep
+  displayName: 'Deploy Vnet'
